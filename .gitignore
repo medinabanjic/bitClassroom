@@ -6,3 +6,16 @@ target
 /.project
 /.settings
 /RUNNING_PID
+
+#new files
+project/project
+project/target
+tmp
+.history
+dist
+/*.iml
+/out
+activator
+activator-launch-1.2.2.jar
+activator.bat
+conf/evolutions
