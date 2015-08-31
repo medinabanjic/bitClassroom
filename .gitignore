@@ -15,9 +15,8 @@ tmp
 dist
 /*.iml
 /out
-activator
 activator-launch-1.3.5.jar
 activator.bat
 conf/evolutions
-LICENSE
 README
+.gitignore~
