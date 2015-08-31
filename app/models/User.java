@@ -2,6 +2,9 @@ package models;
 
 import play.db.ebean.Model;
 
+import javax.persistence.*;
+
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -23,8 +26,6 @@ public class User extends Model {
     public Date lastEntry; // TODO time date
 
     public static Finder<Long, User> find = new Finder(Long.class, User.class);
-
-
 
 }
 
