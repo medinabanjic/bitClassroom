@@ -1,8 +1,18 @@
+
+/* Set background picture, and set background size*/
 body{
 
 	border-top: 1px solid #808080;
 	border-bottom: 7px solid #808080;
-	background-image: url("background.jpg");
+	background: url("background.jpg") no-repeat center center fixed;
+
+  -moz-background-size: cover;
+
+  -webkit-background-size: cover;
+
+  -o-background-size: cover;
+
+   background-size: cover;
 }
 
 .main > div {
@@ -12,8 +22,10 @@ body{
   margin-top: 10px;
 }
 
+/*Set attributes for register class*/
 .register {
 
+  margin-top: 300px;
   width: 500px;
   margin: 30px auto;
   padding: 10px;
@@ -24,16 +36,21 @@ body{
   background-color: #F0F0F0;
   box-shadow: 0 0 20px 0 #000000;
 }
+
+/* Set headers in class register*/
 .register h3 {
   margin: 0 15px 20px;
   border-bottom: 2px solid #72B372;
   padding: 5px 10px 5px 0;
   font-size: 1.1em;
 }
+/*set option to all div in regsiter class*/
 .register div {
   margin: 0 0 15px 0;
   border: none;
 }
+
+/*Set option to all labels in register class*/
 .register label {
   display: inline-block;
   width: 25%;
@@ -41,7 +58,8 @@ body{
   margin: 10px;
 }
 
-.register input[type=text], .register input[type=password] {
+/* Set option for specifed inpuy type element*/
+.register input[type=text], .register input[type=password] , .register input[type=file] {
   width: 65%;
   font-family: "Lucida Grande","Lucida Sans Unicode",Tahoma,Sans-Serif;
   padding: 5px;
@@ -49,9 +67,12 @@ body{
   border-radius: 5px;
   background: rgba(0, 0, 0, 0.07);
 }
+/*Set focus on them*/
 .register input[type=text]:focus, .register input[type=password]:focus, .register input[type=checkbox]:focus {
   background: #FFFFFF;
 }
+
+/*Set style and option for buttons in register class*/
 .register .button {
 
   font-size: 1em;
@@ -63,8 +84,9 @@ body{
   background: -webkit-linear-gradient(#63E651, #42753E);
   background: -moz-linear-gradient(#63E651, #42753E);
   background: -o-linear-gradient(#63E651, #42753E);
-  background: linear-gradient(#63e651, #42753e);
+  background: linear-gradient(grey, #42753e);
 }
+/*Set button hover*/
 .register .button:hover {
   background: #51DB1C;
   background: -webkit-linear-gradient(#51DB1C, #6BA061);
@@ -73,6 +95,7 @@ body{
   background: linear-gradient(#51db1c, #6ba061);
 }
 
+/*Set option for check box*/
 .register .checkboxy {
     display: block;
     position: static;
@@ -81,6 +104,7 @@ body{
     clear: both;
 }
 
+/*Set attributes for checkbox input type*/
 .register  input[type=checkbox] {
     float: right;
     margin-right: 10px;
@@ -94,6 +118,8 @@ body{
 
 }
 
+
+/*Set atribute for input of set age, using selection*/
 .age{
 
   font-family: "Lucida Grande","Lucida Sans Unicode",Tahoma,Sans-Serif;
@@ -110,6 +136,7 @@ background: #FFFFFF;
 
 }
 
+/*Set style for div in info class*/
 .info > div {
 
   display: inline-block;
@@ -117,7 +144,7 @@ background: #FFFFFF;
   width: 49%;
   margin-top: 50px;
   text-align: center;
-  font-family: "Lucida Grande","Lucida Sans Unicode",Tahoma,Sans-Serif;
+  font-family: Tahoma,"Lucida Sans Unicode",Tahoma,Sans-Serif;
   padding: 5px;
   font-size: 0.9em;
   border-radius: 5px;
@@ -126,11 +153,37 @@ background: #FFFFFF;
 
  }
 
+  /*Set style of font to pargraphs in div */
  .info > div > p {
 
- 	font-family: "Tahoma" ,"Sans-Serif";
+ 	font-family: "Sans-Serif" , "Lucida Sans Unicode",Tahoma;
+  font-style: italic;
 
 
  }
+
+/*Set border and bckground of button for upload picture*/
+#submit{
+
+   border-radius: 6px;
+   background: -o-linear-gradient(#63E651, #42753E);
+   background: linear-gradient(grey, #42753e);
+
+}
+
+
+/*Set also hover*/
+#submit:hover{
+
+
+  background: #51DB1C;
+  background: -webkit-linear-gradient(#51DB1C, #6BA061);
+  background: -moz-linear-gradient(#51DB1C, #6BA061);
+  background: -o-linear-gradient(#51DB1C, #6BA061);
+  background: linear-gradient(#51db1c, #6ba061);
+
+
+
+}
 
 

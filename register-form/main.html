@@ -2,21 +2,30 @@
 
 <html>
 <head>
+	<!--Set title of page, set icon of page and made link of main.css-->
 	<title>bitClassroom</title>
 	<link rel="stylesheet" type="text/css" href="main.css">
 	<link rel="icon" href="icon.png" type="image/x-icon">
 </head>
+
+<!--Open body-->
 <body>
 
-	 <header>
+	<!--Set header picture from inputed path-->
+	<header>
         
-           <img src="bitClassroom.jpg" width=100% height=250="logo" >
+         <img src="bitClassroom.jpg" width=100% height=200="logo" >
         
-       </header> 
+    </header>
 
+
+ 
+
+    <!--// Div for bitclassroom information, also contains class info for syle with css-->
    <div class="info"><br>
 
-     <div>
+
+     <div><br><br><br>
        <h2>How it works</h2><br>
          <h3>Easy set up</h3>
 
@@ -43,42 +52,46 @@
 
   </div>
 
-
+<!--Div for registration form -->
   <div class="main">
 
       <div class="one">
 
+      	<!--Div with class register for set settings and style in css -->
         <div class="register">
 
           <h3>Create your account</h3>
 
           <form id="reg-form">
-
-            <div>
-              <label for="name">Name</label>
-              <input type="text" id="name"  placeholder="Frst name Last name"/>
+          	<!-- Div with class for name fields-->
+            <div class="name">
+              <label for="name">Name</label>*
+              <input type="text" id="name"  placeholder="First name"/>
+              <label></label>*
+              <input type="text" id="name"  placeholder="Last name"/>
             </div>
+            <!--Imput email field-->
             <div>
-              <label for="email">Email</label>
+              <label for="email">Email</label>*
               <input type="text" id="email" placeholder="@bitcamp.ba"/>
             </div>
+            <!--Input password fields-->
             <div>
-              <label for="password">Password</label>
+              <label for="password">Password</label>*
               <input type="password" id="password" />
-
             </div>
-
+            <!--Field password again-->
             <div>
-              <label for="password-again">Repeat password</label>
+              <label for="password-again">Repeat password</label>*
               <input type="password" id="password-again" />
             </div>
 
-            <div>
+         <!--Div for age field with select form with option of day, month and year-->
+         <div>
+            <label> Age:</label>*
 
-
-            <label> Age:</label>
-
-            <select name="Birthday_day" id="Birthday_Day" class="age">
+            <!--Selecet day-->
+            <select name="Birthday_day" id="birthday-day" class="age">
 					<option value="-1">Day:</option>
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -116,7 +129,8 @@
 					<option value="31">31</option>
          </select>
  
-	     <select id="Birthday_Month" name="Birthday_Month" class="age">
+ 		 <!--Select month-->
+	     <select id="birthday-month" name="Birthday_Month" class="age">
 					<option value="-1">Month:</option>
 					<option value="January">Jan</option>
 					<option value="February">Feb</option>
@@ -131,8 +145,9 @@
 					<option value="November">Nov</option>
 					<option value="December">Dec</option>
 		  </select>
- 
-          <select name="Birthday_Year" id="Birthday_Year" class="age">
+
+ 		   <!--Select year-->
+           <select name="Birthday-Year" id="birthday-year" class="age">
  
 					<option value="-1">Year:</option>
 
@@ -175,40 +190,75 @@
 
 				</select>
 
+			<!--Close age div-->
            </div>
 
-
+           <!--Div for select gender -->
            <div>
-           		<label>Gender</label>
+           		<label>Gender</label>*
            		Male <input type="radio" name="Gender" value="Male" />
-                Female <input type="radio" name="Gender" value="Female" />*
-
-
-
+                Female <input type="radio" name="Gender" value="Female" />
            </div>	
 
-             <div>
+           <!--Div for input of Skype name-->
+            <div>
               <label for="skype-name">Skype name</label>
               <input type="text" id="skype-name" />
             </div>
 
-             <div>
-              <label for="picture">Profil picture</label>
+
+            <!--Div for input of Facebook profil-->
+            <div>
+              <label for="skype-name">Facebook profile</label>
+              <input type="text" id="skype-name" />
+            </div>
+
+            <!--Div for set profile picture-->
+            <div>
+              <label for="picture">Profile picture</label>
               <input type="text" id="picture" />
             </div>
+       
 
-           <div class="checkboxy">
-                <input name="cecky" id="checky" value="1" type="checkbox" /><label class="terms">I accept the terms of use</label>
+        <!--Open div for upload image-->
+		<div>
+
+    	    <form  class="upload" action="<?php echo $uploadHandler ?>" enctype="multipart/form-data" method="post"> 
+         
+       	
+            <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size ?>"> 
+        
+            <label for="file">Or:</label> 
+            <input id="file" type="file" name="file"> 
+        
+            <label></label> 
+            <input id="submit" type="submit" name="submit" value="Upload!"> 
+        	
+    
+  		   </form> 
+
+  		<!--Close age div-->
+  		</div>
+
+            <!--Div for accept the terms with checkbox-->
+            <div class="checkboxy">
+                <input name="cecky" id="checky" value="1" type="checkbox" /><label class="terms">I accept the <a href="https://support.google.com/edu/classroom/answer/6020279?hl=en" target="_blank">terms</a> of use</label>
+
             </div>
-
+            <!--Set submit button-->
             <div>
               <label></label>
               <input type="submit" value="Create Account" id="create-account1" class="button"/>
             </div>
 
+           <!--Close register form-->
+           </form>
+          <!--Close register div-->
         </div>
+        <!--Close one div-->
       </div>
+      <!--Close main div-->
     </div>
-         
+<!--Close body and html-->     
 </body>
 </html>
