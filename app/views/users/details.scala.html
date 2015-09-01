@@ -8,7 +8,7 @@
       <legend>User (@userForm("name").valueOr("New user"))</legend>
       @helper.inputText(userForm("id"), '_label -> "ID")
       @helper.inputText(userForm("email"), '_label -> "Email")
-      @helper.inputText(userForm("password"), '_label -> "Password")
+      @helper.inputPassword(userForm("password"), '_label -> "Password")
     </fieldset>
     <input type="submit" value="Add User">
   }
