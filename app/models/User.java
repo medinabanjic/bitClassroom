@@ -5,34 +5,35 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import com.avaje.ebean.*;
-import play.db.ebean.*;
+import play.Logger;
 import play.data.format.*;
 import play.data.validation.*;
 
 import com.avaje.ebean.Model;
-import java.lang.*;
+import com.avaje.ebean.Model.Finder;
+
+import java.lang.String;
+import java.lang.Long;
 
 @Entity
 public class User extends Model {
 
-    private static List<User> users;
+    private static List<User> users = new ArrayList<User>();
 
-    static {
-        users = new ArrayList<User>();
-        users.add(new User(1, "email1@mail.com", "pass1"));
-        users.add(new User(2, "email2@mail.com", "pass2"));
-    }
+    public static Finder<String, User> finder = new Finder<String, User>(String.class, User.class);
 
     @Id
-    public Integer id; // TODO integer primary key auto_increment,
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long id;
 
-    public String email; // TODO not null unique
+    @Column(length = 50)
+    public String email;
 
-    public String password; //TODO not null
+    @Column(length = 50)
+    public String password;
 
-
-    //public String username; // TODO not null unique
+    //public String firstName; // TODO not null unique
+    //public String lastName;
     //public Date firstEntry;// TODO time date
     //public Date lastEntry; // TODO time date
 
@@ -43,22 +44,31 @@ public class User extends Model {
 
     }
 
-    public User(Integer id, String email, String password) {
-        this.id = id;
+    /**
+     * Constructor for creating object
+     * @param email
+     * @param password
+     */
+    public User(String email, String password) {
         this.email = email;
         this.password = password;
     }
 
-    /**
-     * example only
-     * @param user
-     */
-    public static void saveToList(User user) {
-        users.add(user);
+    public static List<User> findAll() {
+        List<User> results = new ArrayList<User>(finder.all());
+
+        List<User> user = finder.where().eq("password", "4dbf44c6b1be736ee92ef90090452fc2").findList();
+        Logger.info(user.toString());
+
+        return results;
     }
 
-    public static List<User> findAll() {
-        return new ArrayList<User>(users);
+    public static User findUserByEmailAndPassword(String email, String password) {
+        List<User> user = finder.where().eq("email", email).eq("password", password).findList();
+        if (user.size() == 0) {
+            return null;
+        }
+        return (User) user.get(0);
     }
 
     public static User findById(Integer id) {
@@ -70,26 +80,18 @@ public class User extends Model {
         return null;
     }
 
-    public static List<User> findByEmail(String email) {
-        final List<User> results = new ArrayList<User>();
-        for (User candidate : users) {
-            if (candidate.email.toLowerCase().contains(email.toLowerCase())) {
-                results.add(candidate);
-            }
-        }
-        return results;
-    }
-
     public static boolean remove(User user) {
         return users.remove(user);
     }
 
     public String toString() {
-        return String.format("%d - %s", id, email);
+        return String.format("User email: %s", email);
     }
 
 
-    //public static Finder<Long, User> find = new Finder(Long.class, User.class);
+
+
+
 
 }
 

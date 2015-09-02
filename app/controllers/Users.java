@@ -22,37 +22,40 @@ public class Users extends Controller {
 
     private static final Form<User> userForm = Form.form(User.class);
 
-    public Result list() {
+    public Result index() {
         List<User> users = User.findAll();
-        return ok(list.render(users));
+        return ok("empty first page");
     }
 
-    public Result newUser() {
-        return ok(details.render(userForm));
+    public Result log() {
+        return ok(login.render(userForm));
     }
 
-    public Result details(Integer id) {
-        return TODO;
+    public Result details() {
+        return ok(email.render());
     }
 
-    public Result save() {
+    public Result login() {
         Form<User> boundForm = userForm.bindFromRequest();
-        String stringId = boundForm.bindFromRequest().field("id").value();
+
         String email = boundForm.bindFromRequest().field("email").value();
         String password = boundForm.bindFromRequest().field("password").value();
 
-        Integer id = Integer.parseInt(stringId);
-
         String passwordHashed = getEncriptedPasswordMD5(password);
 
-        User user = new User(id, email, passwordHashed);
-        Logger.info(user.toString());
+        User user = User.findUserByEmailAndPassword(email, passwordHashed);
 
-        User.saveToList(user);
 
-        Ebean.save(user);
+       // User toAdd = new User(email, passwordHashed);
+       // Logger.info(toAdd.toString());
+       // Ebean.save(toAdd);
 
-        return redirect(routes.Users.list());
+        if (user != null) {
+            return ok(register.render("Successful login"));
+        } else {
+            return redirect("login");
+            //return notFound(String.format("User with %s email does not exists.", email));
+        }
 
     }
 

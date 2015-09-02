@@ -1,0 +1,43 @@
+@(userForm: Form[User])
+@import helper._
+
+@main("Login users"){
+
+    @helper.form(action = routes.Users.login()) {
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/login.css")">
+
+        <script type="text/javascript" src="@routes.Assets.versioned("javascripts/login.js")"></script>
+      <div class="login" id="center">
+        <div>
+          <img id="image" src="@routes.Assets.versioned("images/logo.png")" />
+        </div>
+
+        <form action="" method="post">
+          <div>
+            <div>
+              @helper.inputText(userForm("email"), 'id -> "email", 'placeholder -> "Email")
+
+            </div>
+
+            <div>
+              @helper.inputPassword(userForm("password"), 'id -> "password", 'placeholder -> "Password" )
+            </div>
+
+          </div>
+
+          <div>
+            <input type="submit" value="Login" onclick="validateLogin(email, password)" href="@routes.Users.login()" class="button">
+          </div>
+
+          <div>
+            <a href="popupex.html" onclick="return popitup('@routes.Users.details()')" class="a"><em>Did you forgotten password ?</em></a>
+          </div>
+
+        </form>
+      </div>
+
+    }
+  }
+
+
+
