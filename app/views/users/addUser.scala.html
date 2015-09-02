@@ -1,8 +1,8 @@
 @(userForm: Form[User])
 
-@main("Login users") {
+@main("Register new user") {
 
-    @helper.form(action = routes.Users.checkLogin()) {
+    @helper.form(action = routes.Users.saveUser()) {
         <!-- custom css -->
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/login.css")">
 
@@ -13,6 +13,9 @@
             <div>
                 <img id="image" src="@routes.Assets.versioned("images/logo.png")" />
             </div>
+
+            <br>
+            <p><strong>Add new user to database</strong></p>
 
             <form action="" method="post">
                 <div>
@@ -27,12 +30,7 @@
                 </div>
 
                 <div>
-                    <input type="submit" value="Login" onclick="validateLogin(email, password)" href="@routes.Users.checkLogin()" class="button">
-                </div>
-
-                <div>
-                    <a href="popupex.html" onclick="return popitup('@routes.Users.sendEmail()')" class="a"><em>
-                        Did you forgotten password ?</em></a>
+                    <input type="submit" value="Add user" onclick="validateLogin(email, password)" href="@routes.Users.saveUser()" class="button">
                 </div>
 
             </form>

@@ -3,14 +3,19 @@
 # ~~~~
 
 # Home page
-GET         /                    controllers.Application.index()
-GET         /users/login         @controllers.Users.log()
-POST        /users/              @controllers.Users.login()
+GET         /                      @controllers.Application.index()
 
-GET         /users/email         @controllers.Users.details()
+# checks user login
+GET         /users/login           @controllers.Users.login()
+POST        /users/                @controllers.Users.checkLogin()
 
+# popup email
+GET         /users/email           @controllers.Users.sendEmail()
 
+# registers new user
+GET         /users/register        @controllers.Users.register()
+POST        /users/register        @controllers.Users.saveUser()
 
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file        controllers.Assets.versioned(path="/public", file: Asset)
+GET         /assets/*file          controllers.Assets.versioned(path="/public", file: Asset)

@@ -3,7 +3,12 @@ package controllers;
 import play.mvc.Controller;
 import play.mvc.Result;
 import models.*;
-import views.html.users.*;
+
+import utility.MD5PasswordHash;
+import views.html.users.login;
+import views.html.users.email;
+import views.html.users.register;
+import views.html.users.addUser;
 
 import java.util.List;
 import play.data.Form;
@@ -11,9 +16,7 @@ import play.data.Form;
 import com.avaje.ebean.Ebean;
 import play.Logger;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import utility.MD5PasswordHash;
 
 /**
  * Created by boris.tomic on 01/09/15.
@@ -22,53 +25,102 @@ public class Users extends Controller {
 
     private static final Form<User> userForm = Form.form(User.class);
 
-    public Result index() {
-        List<User> users = User.findAll();
-        return ok("empty first page");
-    }
+    private static boolean canAccess = false;
 
-    public Result log() {
+    /**
+     * Renders login page with userForm
+     *
+     * @return
+     */
+    public Result login() {
         return ok(login.render(userForm));
     }
 
-    public Result details() {
+    /**
+     * Renders popup email form
+     *
+     * @return
+     */
+    public Result sendEmail() {
         return ok(email.render());
     }
 
-    public Result login() {
+    /**
+     * Checks login, reads from userForm all the values eg. email and password,
+     * sends both to database for validation. If everything goes well user is
+     * redirected to new page, otherwise user is redirected to login.
+     * TODO validation
+     *
+     * @return
+     */
+    public Result checkLogin() {
         Form<User> boundForm = userForm.bindFromRequest();
+
+        if (boundForm.hasErrors()) {
+            flash("warning", "Please correct the form.");
+            return redirect("login");
+        }
 
         String email = boundForm.bindFromRequest().field("email").value();
         String password = boundForm.bindFromRequest().field("password").value();
 
-        String passwordHashed = getEncriptedPasswordMD5(password);
+        String passwordHashed = MD5PasswordHash.getEncriptedPasswordMD5(password);
 
         User user = User.findUserByEmailAndPassword(email, passwordHashed);
 
-
-       // User toAdd = new User(email, passwordHashed);
-       // Logger.info(toAdd.toString());
-       // Ebean.save(toAdd);
-
+        Logger.info(email + " " + password + " " + passwordHashed);
         if (user != null) {
+            canAccess = true;
+            flash("success", String.format("User %s successfully logged in", user));
             return ok(register.render("Successful login"));
         } else {
+            flash("warning", "User not found under provided email and password.");
             return redirect("login");
-            //return notFound(String.format("User with %s email does not exists.", email));
         }
-
     }
 
-    private String getEncriptedPasswordMD5(String password) {
-        try {
-            MessageDigest md5 = MessageDigest.getInstance("MD5");
-            md5.update(password.getBytes(), 0, password.length());
-            String result = new BigInteger(1, md5.digest()).toString(16);
-            md5.reset();
-            return result;
-        } catch (NoSuchAlgorithmException e) {
-            Logger.error("Could not encript password", e.getMessage());
+    /**
+     * Renders regiser page with userForm, page is used to add new user to database
+     * @return
+     */
+    public Result register() {
+        if (canAccess) {
+            return ok(addUser.render(userForm));
         }
-        return "INVALID PASSWORD";
+        return notFound("Error 404 \nCan't access required site. Please login in to proceed.");
     }
+
+    /**
+     * Reads email and password from userForm, and sends data to database.
+     * TODO validation
+     *
+     * @return
+     */
+    public Result saveUser() {
+        Form<User> boundForm = userForm.bindFromRequest();
+
+        if (boundForm.hasErrors()) {
+            flash("warning", "Please correct the form.");
+            return redirect("register");
+        }
+
+        String email = boundForm.bindFromRequest().field("email").value();
+        String password = boundForm.bindFromRequest().field("password").value();
+        String passwordHashed = MD5PasswordHash.getEncriptedPasswordMD5(password);
+        User user = new User(email, passwordHashed);
+
+        if (user != null) {
+            Ebean.save(user);
+
+            Logger.info(user.toString());
+
+            flash("success", String.format("User %s successfully added to database", user));
+            return ok(addUser.render(userForm));
+        } else {
+            flash("warning", "Can not add user with provided email and password to database.");
+            return redirect("/");
+        }
+    }
+
+
 }
