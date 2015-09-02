@@ -64,7 +64,7 @@ public class Users extends Controller {
             md5.reset();
             return result;
         } catch (NoSuchAlgorithmException e) {
-            // TODO add to logger
+            Logger.error("Could not encript password", e.getMessage());
         }
         return "INVALID PASSWORD";
     }

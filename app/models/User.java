@@ -20,8 +20,7 @@ public class User extends Model {
 
     static {
         users = new ArrayList<User>();
-        users.add(new User(1, "email1@mail.com", "pass1"));
-        users.add(new User(2, "email2@mail.com", "pass2"));
+        
     }
 
     @Id
