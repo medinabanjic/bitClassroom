@@ -3,6 +3,7 @@ package models;
 import com.avaje.ebean.Model;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +29,28 @@ public class User extends Model {
     @Column(name = "password", length = 100)
     public String password;
 
-    //public String firstName; // TODO not null
-    //public String lastName; // TODO not null
+    @Column(name = "name", length = 100)
+    public String name;
+
+    @Column(name = "lastName", length = 100)
+    public String lastName;
+
+    @Column(name ="role", length = 1)
+    public Integer role;
+
+    @Column(name ="yearOfBirth")
+    public Date yearOfBirth;
+
+    @Column(name ="gender")
+    public Integer gender;
+
+    @Column(name="skypeName", length = 100)
+    public String skypeName;
+
+    @Column(name="facebookProfile" ,length = 300)
+    public String facebookProfile;
+
+
     //public Date firstEntry;// TODO timedate
     //public Date lastEntry; // TODO timedate
 
@@ -49,6 +70,30 @@ public class User extends Model {
     public User(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+    /**
+     * Constructor for creating object with all attributes, used for update table for edit your personal info
+     * @param facebookProfile String of faceboook profile link
+     * @param skypeName String skype name (nickname)
+     * @param gender  Integer value: 1 is M 0 is F
+     * @param yearOfBirth Date of birth
+     * @param role Boolean
+     * @param lastName String value of last name
+     * @param name  String value of first name
+     * @param password String of password
+     * @param email String of email address
+     */
+    public User(String facebookProfile, String skypeName, Integer gender, Date yearOfBirth, Integer role, String lastName, String name, String password, String email) {
+        this.facebookProfile = facebookProfile;
+        this.skypeName = skypeName;
+        this.gender = gender;
+        this.yearOfBirth = yearOfBirth;
+        this.role = role;
+        this.lastName = lastName;
+        this.name = name;
+        this.password = password;
+        this.email = email;
     }
 
     /**
@@ -91,12 +136,28 @@ public class User extends Model {
     }
 
     /**
+     * Method for check user role
+     * @param role
+     * @return
+     */
+    public static User findUserByRole( Integer role){
+
+        List<User> user = finder.where().eq("role", role ).findList();
+        if(user.size() == 0){
+
+            return null;
+        }
+        return (User) user.get(0);
+    }
+
+    /**
      * Removes user from ArralList of users.
      *
      * @param user <code>User</code> type value of User object
      * @return <code>boolean</code> type value true if user is removed, false if not
      */
     public static boolean remove(User user) {
+
         return users.remove(user);
     }
 
@@ -106,6 +167,7 @@ public class User extends Model {
      * @return <code>String</code> type value of user email
      */
     public String toString() {
+
         return String.format("%s", email);
     }
 

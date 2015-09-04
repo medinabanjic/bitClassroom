@@ -71,6 +71,7 @@ public class Users extends Controller {
         User user = User.findUserByEmailAndPassword(email, passwordHashed);
 
         Logger.info(email + " " + password + " " + passwordHashed);
+
         if (user != null) {
             canAccess = true;
             flash("success", String.format("User %s successfully logged in", user));
@@ -133,6 +134,12 @@ public class Users extends Controller {
             return ok(addUser.render(userForm));
 
         }
+    }
+
+    public Result updateUser(){
+
+        //TODO updateTable user
+        return null;
     }
 
 

@@ -5,7 +5,6 @@ function checkEmail(email){
 	}
 	
 	if(atposition < 1 || dotposition < atposition + 2 || dotposition + 2 >= email.length){
-		alert("Wrong e-mail address input. Please try again.");
 
 			return false;
 
@@ -16,7 +15,11 @@ function checkEmail(email){
 
 function popitup(url) {
 	newwindow=window.open(url,'name','height=200,width=150');
-	if (window.focus) {newwindow.focus()}
+
+	if (window.focus) {
+		newwindow.focus()
+	}
+
 	return false;
 }
 
