@@ -29,18 +29,21 @@ public class Users extends Controller {
     private static boolean canAccess = false;
 
     /**
-     * Renders login page with userForm
+     * Renders login page with userForm. login form contains field for email
+     * and password only and one log in button that send request to checkLogin
+     * method.
      *
-     * @return
+     * @return rendered login.scala.html view with userForm
      */
     public Result login() {
         return ok(login.render(userForm));
     }
 
     /**
-     * Renders popup email form
+     * Popup window with one field for inputing email and one send button. If send
+     * is pressed password reset link is sent to inputed email.
      *
-     * @return
+     * @return rendered mail.scala.html
      */
     public Result sendEmail() {
         return ok(email.render());
@@ -71,14 +74,15 @@ public class Users extends Controller {
         User user = User.findUserByEmailAndPassword(email, passwordHashed);
 
         Logger.info(email + " " + password + " " + passwordHashed);
+
         if (user != null) {
             canAccess = true;
             flash("success", String.format("User %s successfully logged in", user));
             return ok(register.render("Successful login"));
-        } else {
-            flash("warning", "User not found under provided email and password.");
-            return ok(login.render(boundForm));
         }
+
+        flash("warning", "User not found under provided email and password.");
+        return ok(login.render(boundForm));
     }
 
     /**
@@ -113,7 +117,6 @@ public class Users extends Controller {
 
         if (isValid(email) && isValidPassword(password)) {
             User user = new User(email, passwordHashed);
-
 
             if (user != null) {
                 Ebean.save(user);
