@@ -1,14 +1,21 @@
 package controllers;
 
-import play.*;
-import play.mvc.*;
+import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.index;
 
-import views.html.*;
-
+/**
+ * Controller for Application that represents main application.
+ */
 public class Application extends Controller {
 
+    /**
+     * Index method renders index page and send string to main with message Home
+     *
+     * @return
+     */
     public Result index() {
-        return ok(index.render("Your new application is ready."));
+        return ok(index.render("Home"));
     }
 
 }
