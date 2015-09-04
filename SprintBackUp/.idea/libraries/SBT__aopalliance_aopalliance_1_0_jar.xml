@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="SBT: aopalliance:aopalliance:1.0:jar">
-    <CLASSES>
-      <root url="jar:///usr/local/Cellar/typesafe-activator/1.2.12/libexec/repository/aopalliance/aopalliance/1.0/jars/aopalliance.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
