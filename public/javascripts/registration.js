@@ -4,30 +4,10 @@ function pass_validationCheck()
 	var isGood = true;
 	var pass = document.getElementById("password").value;
 
-	if(pass.length < 6){
-		$("#password").after($("<div class='alert alert-warning' id='test' role='alert' style='width:50%;'>Your password must be at least 6 characters</div>"));
+	if(pass.length < 6 || pass.search(/[a-z]/) < 0 || pass.search(/[A-Z]/) < 0 || pass.search(/[0-9]/) < 0 ){
+		$("#password").after($("<div class='alert alert-warning' id='test' role='alert' style='width:50%;'>Your password must be at least 6 characters, contain at least one lowercase and one uppercase letter and at least one digit u</div>"));
 		styleTest();
 		isGood = false;
-	}
-	if(pass.search(/[a-z]/) < 0){
-		$("#password").after($("<div class='alert alert-warning' id='test' role='alert' style='width:50%;'>Your password must contain at least one lowercase letter</div>"));
-		styleTest();
-		isGood = false;
-
-	}
-	if(pass.search(/[A-Z]/) < 0){
-		$("#password").after($("<div class='alert alert-warning' id='test' role='alert' style='width:50%;'>Your password must contain at least one uppercase letter</div>"));
-		isGood = false;
-		styleTest();
-
-
-	}
-	if(pass.search(/[0-9]/) < 0){
-		$("#password").after($("<div class='alert alert-warning' id='test' role='alert' style='width:50%;'>Your password must contain at least one digit</div>"));
-		styleTest();
-
-		isGood = false;
-
 	}
 
 	if (isGood){
@@ -107,9 +87,6 @@ function checkRepeatPassUncheck(){
 	}
 }
 
-function firstToUpperCase(uname){
-    return uname[0].toUpperCase() + uname.slice(1);
-}
 
 
 function allLetterCheck(uname)
@@ -129,6 +106,23 @@ else if(!uname.value.match(letters))
 }
 }
 
+
+function allLetterCheck(uname)
+{
+	var letters = /^[A-Za-z]+$/;
+	if(uname.value.match(letters))
+	{
+		$("#lastName").after($("<div class='alert alert-success' id='test1' role'alert' style='width:13%;'>Good</div>"));
+		styleTest1();
+
+	}
+	else if(!uname.value.match(letters))
+	{
+		$("#lastName").after($("<div class='alert alert-warning' id='test' role='alert' style='width:50%;'>Only letters allowed</div>"));
+		styleTest();
+
+	}
+}
 
 function allLetterUncheck(uname)
 {

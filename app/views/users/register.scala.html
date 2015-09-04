@@ -53,19 +53,19 @@
                             <!-- Div with class for name fields-->
                         <div class="name">
                             <label for="name">Name</label>*
-                            <input name="name" type="text" onblur="allLetterCheck(this)" onfocus="allLetterUncheck(this)" id="name" placeholder="First name" required />
+                            <input name="firstName" type="text" onblur="allLetterCheck(this)" onfocus="allLetterUncheck(this)" id="name" placeholder="First name" required />
                             <label></label>*
-                            <input type="text" id="name" onblur="allLetterCheck(this)" onfocus="allLetterUncheck(this)" placeholder="Last name"  required/>
+                            <input  name="lastName" type="text" id="lastName" onblur="allLetterCheck(this)" onfocus="allLetterUncheck(this)" placeholder="Last name"  required/>
                         </div>
                             <!--Imput email field-->
                         <div>
                             <label for="email">Email</label>*
-                            <input type="email" id="email" placeholder="&#64bitcamp.ba" required/>
+                            <input name="email" type="email" id="email" placeholder="&#64bitcamp.ba" required/>
                         </div>
                             <!--Input password fields-->
                         <div>
                             <label for="password">Password</label>*
-                            <input type="password" onblur="pass_validationCheck()" onfocus="pass_validationUncheck()" id="password" required />
+                            <input  name="password" type="password" onblur="pass_validationCheck()" onfocus="pass_validationUncheck()" id="password" required />
                         </div>
                             <!--Field password again-->
                         <div>
@@ -80,7 +80,7 @@
                             <label> Date of Birth:</label>*
                             <!--Selecet day-->
                             <form action="action_page.php">
-                                <input type="date" name="bday" required/>
+                                <input type="date" name="yearOfBirth" max="2012-12-31"required/>
                             </form>
 
                         </div>
@@ -88,21 +88,21 @@
                             <!--Div for select gender -->
                         <div>
                             <label>Gender</label>*
-                            Male <input type="radio" name="gender" value="Male" required/>
+                            Male <input name="gender" type="radio"  value="Male" required/>
                             Female <input type="radio" name="gender" value="Female"  required/>
                         </div>
 
                             <!--Div for input of Skype name-->
                         <div>
                             <label for="skype-name">Skype name</label>
-                            <input type="text" id="skype-name" />
+                            <input name="skypeName" type="text" id="skype-name"  />
                         </div>
 
 
                             <!--Div for input of Facebook profil-->
                         <div>
                             <label for="skype-name">Facebook profile</label>
-                            <input type="url" id="skype-name" />
+                            <input  name="facebook" type="url" id="skype-name" value="http://"/>
                         </div>
 
                             <!--Div for set profile picture-->
@@ -131,7 +131,7 @@
 
                             <!--Div for accept the terms with checkbox-->
                         <div class="checkboxy">
-                            <input name="cecky" id="checky" value="1" type="checkbox" /><label class="terms" required>
+                            <input name="cecky" id="checky" value="1" type="checkbox" required /><label class="terms">
                             I accept the <a href="https://support.google.com/edu/classroom/answer/6020279?hl=en" target="_blank">
                             terms</a> of use</label>
 

@@ -138,6 +138,12 @@ public class Users extends Controller {
         }
     }
 
+    public Result updateUser(){
+
+        //TODO updateTable user
+        return null;
+    }
+
 
     /**
      * Checks if email is valid
